@@ -1,0 +1,41 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cairn-lang"
+version = "0.9.0"
+description = "Compatibility shim — `cairn` split into `deborah` (process language) and `huldah` (human-systems analysis)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+authors = [
+    {name = "gellsmore-svg"},
+]
+classifiers = [
+    "Development Status :: 7 - Inactive",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+]
+# Keeps the published `cairn-lang` name so existing installs and pins keep
+# resolving, and pulls the language forward. Huldah stays optional: a consumer
+# that only used the language should not acquire the analysis surface.
+dependencies = ["deborah>=0.9"]
+
+[project.optional-dependencies]
+analysis = ["huldah>=0.1"]
+dev = ["pytest>=8", "ruff>=0.6", "huldah>=0.1"]
+
+[project.urls]
+Homepage = "https://github.com/gellsmore-svg/Deborah"
+Repository = "https://github.com/gellsmore-svg/Deborah"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
