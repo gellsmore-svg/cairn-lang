@@ -1,22 +1,33 @@
 # cairn-lang (compatibility shim)
 
-`cairn` was split into two packages in v0.9:
+**If `import cairn` now warns you, switch to the new packages:**
 
-- **[deborah](https://github.com/gellsmore-svg/Deborah)** — the process language
-  (spec, grammar, conformance, render).
-- **[huldah](https://github.com/gellsmore-svg/Huldah)** — human-systems analysis
-  (human factors, UI evidence, layout load, live observation, agent harness).
+```bash
+pip install deborah            # the process language: spec, grammar, conformance, render
+pip install huldah             # only if you used the analysis half
+```
 
-This package keeps `import cairn` working, re-exporting every pre-split name
-from its new home with a `DeprecationWarning`. Submodules resolve too, including
-deep paths (`cairn.grammar.parser`).
+Then replace `cairn` imports with `deborah` (language) or `huldah` (human
+factors, UI evidence, layout load, live observation, agent harness). The full
+name mapping is in [MIGRATING.md](https://github.com/gellsmore-svg/Deborah/blob/main/MIGRATING.md).
 
-It depends only on `deborah`. If you used the analysis half, install
-`huldah` as well (or `pip install 'cairn-lang[analysis]'`) — otherwise those
-names raise an `ImportError` naming the package to install.
+**Your documents need no changes.** `.cairn.md` files and ```cairn fences keep
+the Cairn name and work exactly as before. Only the Python distributions were
+renamed.
 
-**The document format is unchanged**: `.cairn.md` files and ```cairn fences
-still work exactly as before. Only the Python distributions were renamed.
+## What this package does meanwhile
 
-Scheduled for removal one minor release after the last consumer migrates.
-See [MIGRATING.md](https://github.com/gellsmore-svg/Deborah/blob/main/MIGRATING.md).
+Nothing breaks on day one. `cairn` was split into
+[deborah](https://github.com/gellsmore-svg/Deborah) and
+[huldah](https://github.com/gellsmore-svg/Huldah) in v0.9, and this shim keeps
+`import cairn` working. It re-exports every pre-split name from its new home
+with a `DeprecationWarning`, including deep submodule paths
+(`cairn.grammar.parser`).
+
+It depends only on `deborah`. Analysis names raise an `ImportError` naming the
+package to install unless you also install `huldah` (or
+`pip install 'cairn-lang[analysis]'`).
+
+The shim will be removed one minor release after the last consumer migrates.
+
+Apache 2.0, see [LICENSE](LICENSE).
