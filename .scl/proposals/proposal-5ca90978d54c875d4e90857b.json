@@ -1,0 +1,28 @@
+{
+  "title": "Capture product documents whole (1/1)",
+  "changes": [
+    {
+      "op": "capture_source",
+      "source": {
+        "alias": "c-readme-md-b3356305",
+        "path": "README.md",
+        "ref": "sha256:560d33ce78a2431d398a799070bb4498b84f0d8e1e1bce1b17c2c4fd70a540f6"
+      },
+      "content": "# cairn-lang (compatibility shim)\n\n**If `import cairn` now warns you, switch to the new packages:**\n\n```bash\npip install deborah            # the process language: spec, grammar, conformance, render\npip install huldah             # only if you used the analysis half\n```\n\nThen replace `cairn` imports with `deborah` (language) or `huldah` (human\nfactors, UI evidence, layout load, live observation, agent harness). The full\nname mapping is in [MIGRATING.md](https://github.com/gellsmore-svg/Deborah/blob/main/MIGRATING.md).\n\n**Your documents need no changes.** `.cairn.md` files and ```cairn fences keep\nthe Cairn name and work exactly as before. Only the Python distributions were\nrenamed.\n\n## What this package does meanwhile\n\nNothing breaks on day one. `cairn` was split into\n[deborah](https://github.com/gellsmore-svg/Deborah) and\n[huldah](https://github.com/gellsmore-svg/Huldah) in v0.9, and this shim keeps\n`import cairn` working. It re-exports every pre-split name from its new home\nwith a `DeprecationWarning`, including deep submodule paths\n(`cairn.grammar.parser`).\n\nIt depends only on `deborah`. Analysis names raise an `ImportError` naming the\npackage to install unless you also install `huldah` (or\n`pip install 'cairn-lang[analysis]'`).\n\nThe shim will be removed one minor release after the last consumer migrates.\n\nApache 2.0, see [LICENSE](LICENSE).\n"
+    },
+    {
+      "op": "capture_source",
+      "source": {
+        "alias": "c-pyproject-toml-50c86b7e",
+        "path": "pyproject.toml",
+        "ref": "sha256:226ae285f2e0635022663552374c7194a590b2245694f064c149a4772bf3ea92"
+      },
+      "content": "[build-system]\nrequires = [\"setuptools>=68\", \"wheel\"]\nbuild-backend = \"setuptools.build_meta\"\n\n[project]\nname = \"cairn-lang\"\nversion = \"0.9.0\"\ndescription = \"Compatibility shim — `cairn` split into `deborah` (process language) and `huldah` (human-systems analysis).\"\nreadme = \"README.md\"\nrequires-python = \">=3.11\"\nlicense = \"Apache-2.0\"\nlicense-files = [\"LICENSE\"]\nauthors = [\n    {name = \"gellsmore-svg\"},\n]\nclassifiers = [\n    \"Development Status :: 7 - Inactive\",\n    \"Intended Audience :: Developers\",\n    \"Programming Language :: Python :: 3\",\n]\n# Keeps the published `cairn-lang` name so existing installs and pins keep\n# resolving, and pulls the language forward. Huldah stays optional: a consumer\n# that only used the language should not acquire the analysis surface.\ndependencies = [\"deborah>=0.9\"]\n\n[project.optional-dependencies]\nanalysis = [\"huldah>=0.1\"]\ndev = [\"pytest>=8\", \"ruff>=0.6\", \"huldah>=0.1\"]\n\n[project.urls]\nHomepage = \"https://github.com/gellsmore-svg/Deborah\"\nRepository = \"https://github.com/gellsmore-svg/Deborah\"\n\n[tool.setuptools.packages.find]\nwhere = [\"src\"]\n\n[tool.ruff]\ntarget-version = \"py311\"\n\n[tool.ruff.lint]\nselect = [\"E4\", \"E7\", \"E9\", \"F\"]\n"
+    }
+  ],
+  "base_revision": "05219008f0bea9be22c9c38d03de0c122773d6654752d1801d9d1275820edd6f",
+  "origin": "ai-inferred",
+  "author": "agent",
+  "state": "proposed",
+  "id": "proposal-5ca90978d54c875d4e90857b"
+}
